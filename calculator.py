@@ -17,7 +17,7 @@ def hook_callable_number(s):
         if toknum == NUMBER:
             result.extend([ (NAME, 'callnum'),
                             (OP, '.'),
-                            (NAME, numeric_type(tokval)),
+                            (NAME, numeric_type(tokval.lower())),
                             (OP, '('),
                             (NUMBER, tokval),
                             (OP, ')'), ])
