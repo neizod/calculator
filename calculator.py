@@ -9,6 +9,7 @@ import callnum
 
 __all__ = ['interact']
 
+setattr(builtins, 'callnum', callnum)
 for name in callnum.builtins_name:
     setattr(builtins, name, getattr(callnum, name))
 
@@ -41,10 +42,9 @@ def input_with_callable_number(prompt=''):
 
 def interact( banner   = 'Calculator the Right Way',
               readfunc = input_with_callable_number,
-              local    = { '__name__':      '__calculator__',
-                           '__doc__':       None,
-                            '__builtins__': builtins,
-                           'callnum':       callnum, }, ):
+              local    = { '__name__':     '__calculator__',
+                           '__doc__':      None,
+                           '__builtins__': builtins, }, ):
     ''' Start interactive Python-base calculator. '''
     from code import interact
     import readline
