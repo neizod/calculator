@@ -1,6 +1,8 @@
 import builtins
 
-__all__ = ['int', 'float', 'complex']
+__all__ = ['int', 'float', 'complex', 'builtins_name']
+
+builtins_name = ['real', 'imag', 'conjugate', 'phi']
 
 def class_comparison(base, cmpr):
     ''' returns base >= cmpr under condition complex > float > int '''
@@ -78,7 +80,6 @@ def magic_happens(cls):
 
     return cls
 
-
 @magic_happens
 class int(builtins.int):
     def __call__(self, other):
@@ -93,4 +94,44 @@ class float(builtins.float):
 class complex(builtins.complex):
     def __call__(self, other):
         return self * other
+
+
+def real(x):
+    return type(x)(x.real)
+
+def imag(x):
+    return type(x)(x.imag)
+
+def conjugate(x):
+    return float(x.conjugate())
+
+
+def duality(value):
+    def hook_call(func):
+        class Duality(type(value)):
+            def __call__(self, other):
+                return func(self, other)
+        return Duality(value)
+    return hook_call
+
+@duality((1 + 5**0.5) / 2)
+def phi(self, n):
+    n = abs(n)
+    if 0 <= n <= 1:
+        return 1
+    p = 2
+    r = 1
+    while n != 1:
+        if p ** 2 > n:
+            r *= n - 1
+            break
+        k = 0
+        while not n % p:
+            k += 1
+            n //= p
+        if k:
+            r *= p - 1
+            r *= p ** (k - 1)
+        p += 1 # actuly the next prime
+    return int(r)
 

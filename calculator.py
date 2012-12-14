@@ -9,20 +9,8 @@ import callnum
 
 __all__ = ['interact']
 
-def hook_builtins(func):
-    setattr(builtins, func.__name__, func)
-
-@hook_builtins
-def real(x):
-    return type(x)(x.real)
-
-@hook_builtins
-def imag(x):
-    return type(x)(x.imag)
-
-@hook_builtins
-def conjugate(x):
-    return type(x)(x.conjugate())
+for name in callnum.builtins_name:
+    setattr(builtins, name, getattr(callnum, name))
 
 def numeric_type(tokval):
     tokval = tokval.lower()
