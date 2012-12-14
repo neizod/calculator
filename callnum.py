@@ -43,7 +43,6 @@ def magic_setattr( cls, name, reflex=False, container=False,
     setattr(cls, name, magic_function)
 
 def magic_happens(cls):
-    specific    = { '__int__', '__float__', }
     unary_oprt  = { '__abs__', '__hash__', '__neg__', '__pos__', '__sizeof__', }
     binary_oprt = { '__add__', '__floordiv__', '__mod__', '__mul__',
                     '__pow__', '__sub__', }
@@ -53,6 +52,7 @@ def magic_happens(cls):
     reflex_cont = { '__rdivmod__', }
     binary_nint = { '__truediv__', }
     reflex_nint = { '__rtruediv__', }
+    specific    = { '__int__', '__float__', }
 
     if set(cls.__bases__) <= { builtins.int }:
         unary_oprt  |= { '__ceil__', '__floor__', '__index__', '__invert__', }
@@ -63,22 +63,18 @@ def magic_happens(cls):
     if set(cls.__bases__) <= { builtins.int, builtins.float }:
         unary_oprt  |= { '__round__', '__trunc__', }
 
-    for name in specific:
-        magic_setattr(cls, name, specific=True)
-    for name in unary_oprt:
-        magic_setattr(cls, name)
-    for name in binary_oprt:
-        magic_setattr(cls, name, reflex=False)
-    for name in reflex_oprt:
-        magic_setattr(cls, name, reflex=True)
-    for name in binary_cont:
-        magic_setattr(cls, name, reflex=False, container=True)
-    for name in reflex_cont:
-        magic_setattr(cls, name, reflex=True, container=True)
-    for name in binary_nint:
-        magic_setattr(cls, name, reflex=False, notint=True)
-    for name in reflex_nint:
-        magic_setattr(cls, name, reflex=True, notint=True)
+    magic_types = [ (unary_oprt,  {}),
+                    (binary_oprt, {'reflex': False}),
+                    (reflex_oprt, {'reflex': True}),
+                    (binary_cont, {'reflex': False, 'container': True}),
+                    (reflex_cont, {'reflex': True,  'container': True}),
+                    (binary_nint, {'reflex': False, 'notint': True}),
+                    (reflex_nint, {'reflex': True,  'notint': True}),
+                    (specific,    {'specific': True}), ]
+
+    for names, flag in magic_types: 
+        for name in names:
+            magic_setattr(cls, name, **flag)
 
     return cls
 
