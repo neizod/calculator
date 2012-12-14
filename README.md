@@ -1,31 +1,40 @@
 Calculator the Right Way
 ========================
 
-so many people argue on this:
+So many people argue on this:
 
-[[ pic a/b(c+d) ]]
+![](http://i2.kym-cdn.com/photos/images/original/000/112/837/16h6ja8.jpg)
 
-as a programmer: this should throw `syntax error`.
+As a programmer: this should be thrown `syntax error`.
 
-as a mathematician: `b` should be considered a multiplicant of `(c+d)`, before all of them being divided by `a`.
+As a mathematician: `b` should be considered a multiplicant of `(c+d)`, before all of them being divided by `a`.
+
+Then why implement it as the mathematician said? Ok, let's find out.
 
 How to Use?
 -----------
 
-inside this dir, just
+Inside this dir, just
 
     python3 calculator
 
-this is something i recommend you to try out:
+Here are something I recommend you to try out:
 
-    9/3(2+1)
-    (1 + 2j)(2 + 1j)
-    2**3(4)
-    1(2(3(4(5(6(7(8(9))))))))
+    >>> 9/3(2+1)
+    1.0
+    >>> 10(9(8(7(6(5(4(3(2(1)))))))))
+    3628800
+    >>> (1+2j)(3-4j)
+    (11+2j)
 
-cautions: something are not work (yet)
+What's Differ from Python?
+--------------------------
 
-- multiline statement -- function declairtion, multiline if-else block
-- some std function e.g. factorial
-- attrbute part of int, float, complex -- real, imag
+- `int`, `float`, `complex` are now callable.
+- `real`, `imag`, `conjugate` became functions.
+
+See Also
+--------
+
+- <http://knowyourmeme.com/memes/48293>
 
