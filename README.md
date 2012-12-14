@@ -19,7 +19,7 @@ Inside this dir, just
 
     python3 calculator
 
-Here are something I recommend you to try out:
+Here is something I recommend you to try out:
 
     >>> 9/3(2+1)
     1.0

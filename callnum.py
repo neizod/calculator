@@ -19,7 +19,7 @@ def class_comparison(base, cmpr):
 def magic_setattr( cls, name, reflex=False, container=False,
                    specific=False, notint=False ):
     f = getattr(cls, name)
-    def magic_function(self, *args, **kwargs):
+    def magic_method(self, *args, **kwargs):
         if specific:
             if name == '__int__':
                 return int(f(self))
@@ -42,7 +42,7 @@ def magic_setattr( cls, name, reflex=False, container=False,
             return g(self)
         # many args
         return cls(f(self, *args, **kwargs))
-    setattr(cls, name, magic_function)
+    setattr(cls, name, magic_method)
 
 def magic_happens(cls):
     unary_oprt  = { '__abs__', '__hash__', '__neg__', '__pos__', '__sizeof__', }
