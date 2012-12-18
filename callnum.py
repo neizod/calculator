@@ -14,7 +14,11 @@ def class_comparison(base, cmpr):
         return True
     if isinstance(cmpr, builtins.float):
         return False
-    return True
+    if isinstance(cmpr, builtins.int):
+        return True
+    # since python can manipulate string w/ num, like 5*'-'
+    # False must be returns to prevent conflict.
+    return False
 
 def magic_setattr( cls, name, reflex=False, container=False,
                    specific=False, notint=False ):
