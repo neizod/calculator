@@ -3,7 +3,7 @@ Calculator the Right Way
 
 So many people argue on this:
 
-![]( http://i3.kym-cdn.com/photos/images/original/000/206/784/4829%203.jpg)
+![](http://i1.kym-cdn.com/photos/images/original/000/206/784/6de.jpg)
 
 As a programmer: this **must** be thrown `syntax error`.
 
